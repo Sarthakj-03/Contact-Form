@@ -1,0 +1,26 @@
+.app-shell {
+  width: min(1160px, calc(100% - 24px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.app-header {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #2d6cdf 0%, #4f84ff 100%);
+  color: white;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+}
+
+.app-header p {
+  margin: 0;
+  max-width: 760px;
+  line-height: 1.6;
+}

@@ -1,0 +1,53 @@
+<div class="dialog-backdrop" (click)="close.emit()">
+  <div class="dialog-card" (click)="$event.stopPropagation()">
+    <header class="dialog-header">
+      <div>
+        <h2>Message Submitted</h2>
+        <p *ngIf="successMessage">{{ successMessage }}</p>
+      </div>
+      <button
+        type="button"
+        class="close-button"
+        aria-label="Close"
+        (click)="close.emit()"
+      >
+        ×
+      </button>
+    </header>
+
+    <div class="dialog-body">
+      <dl>
+        <div>
+          <dt>Name</dt>
+          <dd>{{ data?.firstName }} {{ data?.lastName }}</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd>{{ data?.email }}</dd>
+        </div>
+        <div>
+          <dt>Phone</dt>
+          <dd>{{ data?.phone }}</dd>
+        </div>
+        <div>
+          <dt>Subject</dt>
+          <dd>{{ data?.subject }}</dd>
+        </div>
+        <div>
+          <dt>Message</dt>
+          <dd>{{ data?.message }}</dd>
+        </div>
+        <div>
+          <dt>Submitted At</dt>
+          <dd>{{ data?.submittedAt }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <footer class="dialog-footer">
+      <button type="button" class="primary-button" (click)="close.emit()">
+        Saved
+      </button>
+    </footer>
+  </div>
+</div>

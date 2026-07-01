@@ -1,0 +1,147 @@
+<section class="contact-panel">
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate>
+    <div class="form-grid">
+      <div class="form-control">
+        <label for="firstName">First Name *</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          placeholder="Enter first name"
+        />
+        <p class="error" *ngIf="f.firstName.invalid && (f.firstName.touched || f.firstName.dirty)">
+          <span *ngIf="f.firstName.errors?.required">First name is required.</span>
+          <span *ngIf="f.firstName.errors?.minlength">Minimum 3 characters required.</span>
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label for="lastName">Last Name *</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          placeholder="Enter last name"
+        />
+        <p class="error" *ngIf="f.lastName.invalid && (f.lastName.touched || f.lastName.dirty)">
+          <span *ngIf="f.lastName.errors?.required">Last name is required.</span>
+          <span *ngIf="f.lastName.errors?.minlength">Minimum 3 characters required.</span>
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label for="email">Email *</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter email"
+        />
+        <p class="error" *ngIf="f.email.invalid && (f.email.touched || f.email.dirty)">
+          <span *ngIf="f.email.errors?.required">Email is required.</span>
+          <span *ngIf="f.email.errors?.pattern">Email format should be abc@xyz.dfg.</span>
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label for="phone">Phone Number *</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="10 digits"
+          maxlength="10"
+          inputmode="numeric"
+          (input)="onPhoneInput($event)"
+        />
+        <p class="error" *ngIf="f.phone.invalid && (f.phone.touched || f.phone.dirty)">
+          <span *ngIf="f.phone.errors?.required">Phone number is required.</span>
+          <span *ngIf="f.phone.errors?.pattern">Phone no. should be 10 digits</span>
+        </p>
+      </div>
+
+      <div class="form-control full-width">
+        <label for="subject">Subject *</label>
+        <input
+          id="subject"
+          type="text"
+          formControlName="subject"
+          placeholder="Enter subject"
+        />
+        <p class="error" *ngIf="f.subject.invalid && (f.subject.touched || f.subject.dirty)">
+          <span *ngIf="f.subject.errors?.required">Subject is required.</span>
+          <span *ngIf="f.subject.errors?.minlength">Minimum 5 characters required.</span>
+        </p>
+      </div>
+
+      <div class="form-control full-width">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          formControlName="message"
+          rows="6"
+          placeholder="Enter your message"
+        ></textarea>
+        <div class="message-footer">
+          <p class="error" *ngIf="f.message.invalid && (f.message.touched || f.message.dirty)">
+            <span *ngIf="f.message.errors?.required">Message is required.</span>
+            <span *ngIf="f.message.errors?.minlength">Minimum 20 characters required.</span>
+            <span *ngIf="f.message.errors?.maxlength">Maximum 500 characters reached.</span>
+          </p>
+          <span class="counter">{{ messageCount }}/500</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button type="button" class="reset-btn" (click)="resetForm()">Reset</button>
+      <button type="submit" [disabled]="!contactForm.valid" class="submit-btn">
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <app-contact-dialog
+    *ngIf="dialogData"
+    [data]="dialogData"
+    [successMessage]="successMessage"
+    (close)="closeDialog()"
+  ></app-contact-dialog>
+
+  <section class="record-table" *ngIf="submittedRecords.length > 0">
+    <h2>Submitted Records</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of submittedRecords">
+            <td>{{ record.firstName }} {{ record.lastName }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.phone }}</td>
+            <td>{{ record.subject }}</td>
+            <td>{{ record.message }}</td>
+            <td>{{ record.submittedAt }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+     <div class="table-action">
+    <button
+      type="button"
+      class="clear-btn"
+      (click)="clearRecords()"
+    >
+      Clear Records
+    </button>
+  </div>
+  </section>
+</section>
